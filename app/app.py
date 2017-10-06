@@ -102,7 +102,6 @@ class Response:
 
     class HeaderBuilder:
         def __init__(self, body, code = '200', status = 'OK', content_type = 'text/plain'):
-            self.author = 'M Gilang Januar'
             self.body = body
             self.code = code
             self.status = status
@@ -133,7 +132,6 @@ class Response:
             data.append('\nContent-Type: {}'.format(self.content_type))
             data.append('\nContent-Length: {}'.format(self.content_length))
             data.append('\nETag: {}'.format(self.etag))
-            data.append('\nAuthor: {}'.format(self.author))
             for header in self.headers:
                 data.append('\n{}: {}'.format(header, self.headers[header]))
             data.append('\nConnection: close\n\n')
