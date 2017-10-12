@@ -2,6 +2,7 @@ import re
 import json
 import binascii
 import hashlib
+import json
 from urllib import parse
 from datetime import datetime
 
@@ -91,11 +92,17 @@ class Response:
             builder.parse(options)
         self.data.extend(builder.build())
 
-    def send(self, body, options = None):
+    def send(self, body, options = {}):
         self._build_header(body, options)
         self.data.append(body)
 
-    def send_raw(self, body, options = None):
+    def send_json(self, body, options = {}):
+        body = json.dumps(body)
+        options['content-type'] = 'application/json'
+        self._build_header(body, options)
+        self.data.append(body)
+
+    def send_raw(self, body, options = {}):
         self._build_header(body, options)
         self.raw_data.append(body)
 
